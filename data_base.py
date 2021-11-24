@@ -1,4 +1,5 @@
 import sys
+import pymysql
 import pymysql.cursors
 from datetime import datetime as dt
 
@@ -92,13 +93,21 @@ class DataBase(object):
                         
                         try:
                             mysql.execute(sql)
+                            print(f'Linha {i} inserida com suesso')
                         except:
                             print(sql)
+                            print(f'\nFalha na inserção da linha {i}\n')
+                            input()
                             sys.exit()
 
+                print(f'\nForam inseridos (ou atualizados) um total de {i} registros')
+                
             conn.close()
 
-            return True
+            return i
+
+        else:
+            return False
 
 
     def get_data_inserted(self):

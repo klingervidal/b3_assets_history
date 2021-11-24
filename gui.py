@@ -21,15 +21,18 @@ def create_main_window():
         [
             sg.Button("Importar para o MySQL", key="-START-", size=(20,1), button_color=('white', 'SeaGreen4')),
             sg.Button("Finalizar Programa", key="-FINISH-", size=(20,1), button_color=('white', 'firebrick4'))
-        ]
+        ],
+        [
+            sg.Output(size=(80,25))
+        ],
     ]
 
-    window = sg.Window("Importação dados B3", layout)
+    window = sg.Window("Importação dados B3", layout, location=(400,100))
 
     return window
 
 
-def create_second_window():
+def create_second_window(count_total_inserts):
     today = dt.now().strftime("%d/%m/%Y")
 
     # Instantiating Data Base
@@ -45,19 +48,23 @@ def create_second_window():
             sg.Text(f"Dados Importados em {today}")
         ],
         [   
-            sg.Table(values=data_inserted_list, headings=[  'IdData', 'Tipo de Registro', 'Data do Pregão',
-                                                            'Cód. BDI', 'Cód. Negociação', 'Tipo de Mercado',
-                                                            'Nome Empresa', 'Especificação do Papel', 'Prazo Dias Mercado a Termo',
-                                                            'Moeda Refrência', 'Preço de Abertura', 'Preço Máximo', 'Preço Mínimo',
-                                                            'Preço Médio', 'Preço Último Negócio', 'Preço Melhor Oferta de Compra',
-                                                            'Preço Melhor Oferta de Venda', 'Número de Negócios', 'Quantidade de Papéis Negociados',
-                                                            'Volume Total Negociado', 'Preço Exercício', 'Indicador de Correção de Preços',
-                                                            'Data Vencimento', 'Fator Cotação', 'Preço Exercício Pontos',
-                                                            'Cód. ISIN', 'Número Distribuição Papel', 'Data da Importação'
-                                                        ], num_rows=min(30, len(data_inserted_list)))
+            sg.Table(values=data_inserted_list,
+                     headings=[     'IdData', 'Tipo de Registro', 'Data do Pregão',
+                                    'Cód. BDI', 'Cód. Negociação', 'Tipo de Mercado',
+                                    'Nome Empresa', 'Especificação do Papel', 'Prazo Dias Mercado a Termo',
+                                    'Moeda Refrência', 'Preço de Abertura', 'Preço Máximo', 'Preço Mínimo',
+                                    'Preço Médio', 'Preço Último Negócio', 'Preço Melhor Oferta de Compra',
+                                    'Preço Melhor Oferta de Venda', 'Número de Negócios', 'Quantidade de Papéis Negociados',
+                                    'Volume Total Negociado', 'Preço Exercício', 'Indicador de Correção de Preços',
+                                    'Data Vencimento', 'Fator Cotação', 'Preço Exercício Pontos',
+                                    'Cód. ISIN', 'Número Distribuição Papel', 'Data da Importação'],
+                     num_rows=min(30,
+                     len(data_inserted_list)),
+                     vertical_scroll_only=False,
+                     auto_size_columns=True)
         ],
         [
-            sg.Text("")
+            sg.Text(f'\nForam inseridos (ou atualizados) um total de {count_total_inserts} registros')
         ],
         [
             sg.Text("")
@@ -102,9 +109,9 @@ while True:
                 # Seting data to MySql Data Base
                 insert_finish = data_obj.insert_data_mysql(asset_data)
 
-                if insert_finish:
+                if not insert_finish == False:
                     main_window.hide()
-                    active_window = create_second_window()
+                    active_window = create_second_window(insert_finish)
         else:
             sg.Popup('Favor selecionar o arquivo a ser carregado no campo "Selecione o seu arquivo TXT"', keep_on_top=True)
     
