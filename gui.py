@@ -90,7 +90,6 @@ while True:
 
     if event == "-START-":
         if values['-FILE-'] != '':
-            
             # Instantiating ETL Object with
             etl_obj = etl.EtlAssetData()
 
@@ -99,7 +98,6 @@ while True:
             if not valid_file_format:
                 sg.Popup('Conteúdo do arquivo com formato fora do padrão. Favor verificar o cabeçalho.', keep_on_top=True)
             else:
-
                 # Getting transformed data
                 asset_data = etl_obj.etl(values['-FILE-'])
 
