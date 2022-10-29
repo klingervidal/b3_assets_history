@@ -30,7 +30,7 @@
 - 6. Wait until the finish of the process, so, you will can see and check the upload data to the database;
 <img src="images/2.png">
 
-### <br>Note: It was developed just to practice and study the Python Language. The code write and all comments are in English language, just to practice the English lenguage and because too it's considerated a good practice in the develop community, whenever appropriate, implement the codes in English language.<br><br>
+### <br>Note: It was developed just to practice and study the Python Language. The code write and all comments are in English language, just to practice the English lenguage and also because it's considered a good practice in the develop community, whenever appropriate, implement the codes in English language.<br><br>
 > ## Thankyou for visiting.
 
 <br><br>
