@@ -35,7 +35,7 @@
 
 <br><br>
 
-## Esta aplicação proporciona um jeito simples para relizar upload e tratar dados de ativos do site da B3.
+## Esta aplicação proporciona um jeito simples para relizar upload e tratar dados de ativos do site da B3. Você pode ver abaixo algumas instruções sobre como utilizá-la.
 
 # INSTRUÇÕES
 
